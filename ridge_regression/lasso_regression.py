@@ -71,7 +71,7 @@ for i in range(fold_number):
 
             w_penalty = w.copy()
             w_penalty[0] = 0
-            grad_penalty = 2 * lambda_[current_lambda] * w_penalty
+            grad_penalty = lambda_[current_lambda] * np.sign(w_penalty)
 
             w = w - lr * (grad_w + grad_penalty)
         
@@ -105,7 +105,7 @@ for epoch in range(final_epochs):
     grad_w = (2/sample_number) * np.dot(X_shuffled.T, error)
     
     w_penalty = w_final.copy(); w_penalty[0] = 0
-    grad_penalty = 2 * best_lambda * w_penalty
+    grad_penalty = lambda_[current_lambda] * np.sign(w_penalty)
     
     w_final = w_final - final_lr * (grad_w + grad_penalty)
 
